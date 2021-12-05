@@ -1,22 +1,22 @@
 import pandas as pd
 
-class Pracownik():
-    def __init__(self, imie, nazwisko, pesel, wynagrodzenie, umowa, premie = {}):
-        self.imie = imie
-        self.nazwisko = nazwisko
+class Employee():
+    def __init__(self, first_name, surname, pesel, salary, contract, bonuses = {}):
+        self.first_name = first_name
+        self.surname = surname
         self.pesel = pesel
-        self.wynagrodzenie = wynagrodzenie
-        self.umowa = umowa
-        self.premie = premie    # {"rodzaj_premii": wartosc}
+        self.salary = salary
+        self.contract = contract
+        self.bonuses = bonuses    # {"rodzaj_premii": wartosc}
 
-    def dodaj_premie(self, nazwa, wartosc):
-        self.premie[nazwa] = wartosc
+    def add_bonus(self, bonus_name, amount):
+        self.bonuses[bonus_name] = amount
 
 
 class BazaDanych():
-    def __init__(self, nazwa):        # Tworzy pusta baze pracownikow
-        self.nazwa_bazy = nazwa
-        self.baza = []              # Lista obiektów Pracownik
+    def __init__(self, db_name):        # Tworzy pusta baze pracownikow
+        self.db_name = db_name
+        self.db = []              # Lista obiektów Pracownik
         self.imiona = [pracownik.imie for pracownik in self.baza]
         self.nazwiska = [pracownik.nazwisko for pracownik in self.baza]
         self.pesele = [pracownik.pesel for pracownik in self.baza]
@@ -32,7 +32,7 @@ class BazaDanych():
             df = pd.read_csv(file_name, index_col=None)
 
         for row in df.iterrows():
-            nowy_pracownik = Pracownik(row[1][0], row[1][1], str(row[1][2]), row[1][3], row[1][4], row[1][5])
+            nowy_pracownik = Employee(row[1][0], row[1][1], str(row[1][2]), row[1][3], row[1][4], row[1][5])
             self.baza.append(nowy_pracownik)    
 
     def zapisz_baze(self, file_name):             # Zapisuje baze do pliku
@@ -45,7 +45,7 @@ class BazaDanych():
         for pracownik in self.baza:
             print(f"{self.baza.index(pracownik)} {pracownik.imie} {pracownik.nazwisko} {pracownik.pesel} {pracownik.wynagrodzenie} {pracownik.umowa} {pracownik.premie}")
 
-    def dodaj_pracownika(self, pracownik:Pracownik):        # Dodaje pracownika do bazy
+    def dodaj_pracownika(self, pracownik:Employee):        # Dodaje pracownika do bazy
         self.baza.append(pracownik)
 
     def usun_pracownika(self, imie, nazwisko):         # Usuwa pracownika z bazy
