@@ -140,6 +140,10 @@ ul.ns {
     padding: 10px 50px;
 }
 
+.nav-item {
+    margin-left: 8px;
+}
+
 .mnb {
     position: fixed;
     z-index: 1;
