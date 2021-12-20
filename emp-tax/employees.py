@@ -12,7 +12,6 @@ class Employee():
     def add_bonus(self, bonus_name, amount):
         self.bonuses[bonus_name] = amount
 
-
 class BazaDanych():
     def __init__(self, db_name):        # Tworzy pusta baze pracownikow
         self.db_name = db_name
